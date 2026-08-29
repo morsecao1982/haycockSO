@@ -173,7 +173,7 @@ nav {
 .card-icon { font-size: 28px; margin-bottom: 12px; }
 .card h3 { font-size: 17px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
 .card p { font-size: 14px; color: var(--text-light); line-height: 1.6; }
-.card a { color: var(--primary); }
+.card a:not(.btn) { color: var(--primary); }
 
 /* ── ANNOUNCEMENT BANNER ── */
 .announce {
