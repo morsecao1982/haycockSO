@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Haycock Science Olympiad</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  body { min-height: 100vh; }
+  #login-view { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+  #dashboard-view { display: none; }
+
+  .filter-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-bar input, .filter-bar select {
+    padding: 8px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .filter-bar input { flex: 1; min-width: 200px; }
+  .events-cell { display: flex; flex-wrap: wrap; gap: 4px; }
+  .no-results { text-align: center; padding: 40px; color: var(--text-light); font-size: 15px; }
+  .admin-topbar {
+    background: var(--primary-dark);
+    color: white;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .admin-topbar h1 { font-size: 18px; font-weight: 700; margin-right: auto; }
+  .admin-topbar a { color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; }
+  .admin-topbar a:hover { color: white; }
+  #logout-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  #logout-btn:hover { background: rgba(255,255,255,0.22); }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN VIEW ── -->
+<div id="login-view">
+  <div class="form-card" style="max-width: 400px; width: 100%;">
+    <div style="text-align: center; margin-bottom: 28px;">
+      <div style="font-size: 36px; margin-bottom: 8px;">🏆</div>
+      <h2 style="font-size: 22px; font-weight: 800; color: var(--primary);">Admin Login</h2>
+      <p style="font-size: 14px; color: var(--text-light); margin-top: 6px;">Haycock Science Olympiad</p>
+    </div>
+
+    <div id="login-error" class="form-alert error"></div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" required placeholder="admin@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" required placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary" id="login-btn" style="width:100%;padding:13px;font-size:15px;">
+        Sign In
+      </button>
+    </form>
+
+    <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--text-light);">
+      <a href="../index.html" style="color: var(--primary);">← Back to site</a>
+    </p>
+  </div>
+</div>
+
+<!-- ── DASHBOARD VIEW ── -->
+<div id="dashboard-view">
+  <div class="admin-topbar">
+    <h1>🏆 Haycock SO — Admin Dashboard</h1>
+    <a href="../index.html">View Site</a>
+    <button id="logout-btn" onclick="logout()">Sign Out</button>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+
+      <!-- STATS -->
+      <div class="admin-stats" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-total">—</div>
+          <div class="stat-label">Total Submissions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-new">—</div>
+          <div class="stat-label">New (last 7 days)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-returning">—</div>
+          <div class="stat-label">Returning Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-events">—</div>
+          <div class="stat-label">Unique Events Requested</div>
+        </div>
+      </div>
+
+      <!-- FILTER + EXPORT -->
+      <div class="filter-bar">
+        <input type="text" id="search-input" placeholder="Search by name, email, or event…">
+        <select id="grade-filter">
+          <option value="">All Grades</option>
+          <option value="6">Grade 6</option>
+          <option value="7">Grade 7</option>
+          <option value="8">Grade 8</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+        </select>
+        <select id="returning-filter">
+          <option value="">All Members</option>
+          <option value="yes">Returning Only</option>
+          <option value="no">New Only</option>
+        </select>
+        <button class="btn btn-primary" onclick="exportCSV()" style="padding:8px 18px;font-size:14px;">
+          ⬇ Export CSV
+        </button>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap">
+        <table id="submissions-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Grade</th>
+              <th>Returning</th>
+              <th>Parent Email</th>
+              <th>Events Interested</th>
+              <th>Experience</th>
+              <th>Notes</th>
+              <th>Submitted</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr><td colspan="9" class="no-results">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="row-count" style="font-size:13px;color:var(--text-light);margin-top:12px;"></p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script>
+<script>
+let allRows = [];
+
+// ── AUTH CHECK ON LOAD ──────────────────────────────────────────
+(async () => {
+  const { data: { session } } = await db.auth.getSession();
+  if (session) showDashboard();
+})();
+
+db.auth.onAuthStateChange((event, session) => {
+  if (session) showDashboard();
+  else showLogin();
+});
+
+// ── LOGIN ───────────────────────────────────────────────────────
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('login-btn');
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+
+  const { error } = await db.auth.signInWithPassword({
+    email:    document.getElementById('login-email').value,
+    password: document.getElementById('login-password').value,
+  });
+
+  if (error) {
+    errEl.style.display = 'block';
+    errEl.textContent = error.message;
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
+  // onAuthStateChange fires and calls showDashboard() on success
+});
+
+async function logout() {
+  await db.auth.signOut();
+}
+
+// ── VIEWS ────────────────────────────────────────────────────────
+function showLogin() {
+  document.getElementById('login-view').style.display = 'flex';
+  document.getElementById('dashboard-view').style.display = 'none';
+}
+function showDashboard() {
+  document.getElementById('login-view').style.display = 'none';
+  document.getElementById('dashboard-view').style.display = 'block';
+  loadSubmissions();
+}
+
+// ── LOAD DATA ────────────────────────────────────────────────────
+async function loadSubmissions() {
+  const { data, error } = await db
+    .from('submissions')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    document.getElementById('table-body').innerHTML =
+      `<tr><td colspan="9" class="no-results" style="color:var(--error);">Error: ${error.message}</td></tr>`;
+    return;
+  }
+
+  allRows = data || [];
+  updateStats(allRows);
+  renderTable(allRows);
+
+  // live search / filter
+  document.getElementById('search-input').addEventListener('input', applyFilters);
+  document.getElementById('grade-filter').addEventListener('change', applyFilters);
+  document.getElementById('returning-filter').addEventListener('change', applyFilters);
+}
+
+function applyFilters() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const grade = document.getElementById('grade-filter').value;
+  const ret = document.getElementById('returning-filter').value;
+
+  const filtered = allRows.filter(r => {
+    const text = `${r.first_name} ${r.last_name} ${r.parent_email} ${(r.events||[]).join(' ')}`.toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (grade && String(r.grade) !== grade) return false;
+    if (ret && r.returning !== ret) return false;
+    return true;
+  });
+  renderTable(filtered);
+}
+
+function updateStats(rows) {
+  const sevenDaysAgo = new Date(Date.now() - 7*24*3600*1000).toISOString();
+  const allEvents = new Set(rows.flatMap(r => r.events || []));
+
+  document.getElementById('stat-total').textContent = rows.length;
+  document.getElementById('stat-new').textContent = rows.filter(r => r.created_at >= sevenDaysAgo).length;
+  document.getElementById('stat-returning').textContent = rows.filter(r => r.returning === 'yes').length;
+  document.getElementById('stat-events').textContent = allEvents.size;
+}
+
+function renderTable(rows) {
+  const tbody = document.getElementById('table-body');
+  document.getElementById('row-count').textContent =
+    `Showing ${rows.length} of ${allRows.length} submission${allRows.length !== 1 ? 's' : ''}`;
+
+  if (rows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" class="no-results">No submissions found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = rows.map((r, i) => `
+    <tr>
+      <td style="color:var(--text-light);font-size:13px;">${i + 1}</td>
+      <td><strong>${esc(r.first_name)} ${esc(r.last_name)}</strong></td>
+      <td>${r.grade ? `Grade ${r.grade}` : '—'}</td>
+      <td>${r.returning === 'yes'
+        ? '<span class="badge badge-gold">Returning</span>'
+        : '<span class="badge badge-blue">New</span>'}</td>
+      <td><a href="mailto:${esc(r.parent_email)}" style="color:var(--primary);">${esc(r.parent_email)}</a></td>
+      <td><div class="events-cell">${(r.events||[]).map(ev =>
+        `<span class="badge badge-blue" style="font-size:11px;">${esc(ev)}</span>`).join('')}</div></td>
+      <td>${formatExp(r.experience)}</td>
+      <td style="max-width:200px;font-size:13px;color:var(--text-light);">${esc(r.notes || '—')}</td>
+      <td style="white-space:nowrap;font-size:13px;color:var(--text-light);">${formatDate(r.created_at)}</td>
+    </tr>
+  `).join('');
+}
+
+// ── CSV EXPORT ───────────────────────────────────────────────────
+function exportCSV() {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const grade = document.getElementById('grade-filter').value;
+  const ret = document.getElementById('returning-filter').value;
+  const rows = allRows.filter(r => {
+    const text = `${r.first_name} ${r.last_name} ${r.parent_email} ${(r.events||[]).join(' ')}`.toLowerCase();
+    if (search && !text.includes(search)) return false;
+    if (grade && String(r.grade) !== grade) return false;
+    if (ret && r.returning !== ret) return false;
+    return true;
+  });
+
+  const cols = ['first_name','last_name','grade','returning','parent_email','student_email','phone','events','experience','notes','created_at'];
+  const header = cols.join(',');
+  const csvRows = rows.map(r =>
+    cols.map(c => {
+      const v = c === 'events' ? (r[c]||[]).join('; ') : (r[c] ?? '');
+      return `"${String(v).replace(/"/g, '""')}"`;
+    }).join(',')
+  );
+
+  const blob = new Blob([header + '\n' + csvRows.join('\n')], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `haycock-so-submissions-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── HELPERS ──────────────────────────────────────────────────────
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function formatDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+function formatExp(v) {
+  const map = { none: 'None', '1year': '1 year', '2years': '2 years', '3plus': '3+ years' };
+  return map[v] || v || '—';
+}
+</script>
+
+</body>
+</html>
