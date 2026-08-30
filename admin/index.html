@@ -253,7 +253,7 @@ function applyFilters() {
     const text = `${r.first_name} ${r.last_name} ${r.parent_email} ${(r.events||[]).join(' ')}`.toLowerCase();
     if (q && !text.includes(q)) return false;
     if (grade && String(r.grade) !== grade) return false;
-    if (ret && r.returning !== ret) return false;
+    if (ret && r.is_returning !== ret) return false;
     return true;
   });
   renderTable(filtered);
@@ -265,7 +265,7 @@ function updateStats(rows) {
 
   document.getElementById('stat-total').textContent = rows.length;
   document.getElementById('stat-new').textContent = rows.filter(r => r.created_at >= sevenDaysAgo).length;
-  document.getElementById('stat-returning').textContent = rows.filter(r => r.returning === 'yes').length;
+  document.getElementById('stat-returning').textContent = rows.filter(r => r.is_returning === 'yes').length;
   document.getElementById('stat-events').textContent = allEvents.size;
 }
 
@@ -284,7 +284,7 @@ function renderTable(rows) {
       <td style="color:var(--text-light);font-size:13px;">${i + 1}</td>
       <td><strong>${esc(r.first_name)} ${esc(r.last_name)}</strong></td>
       <td>${r.grade ? `Grade ${r.grade}` : '—'}</td>
-      <td>${r.returning === 'yes'
+      <td>${r.is_returning === 'yes'
         ? '<span class="badge badge-gold">Returning</span>'
         : '<span class="badge badge-blue">New</span>'}</td>
       <td><a href="mailto:${esc(r.parent_email)}" style="color:var(--primary);">${esc(r.parent_email)}</a></td>
@@ -306,7 +306,7 @@ function exportCSV() {
     const text = `${r.first_name} ${r.last_name} ${r.parent_email} ${(r.events||[]).join(' ')}`.toLowerCase();
     if (search && !text.includes(search)) return false;
     if (grade && String(r.grade) !== grade) return false;
-    if (ret && r.returning !== ret) return false;
+    if (ret && r.is_returning !== ret) return false;
     return true;
   });
 
