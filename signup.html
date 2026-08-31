@@ -146,10 +146,13 @@
   <a href="admin/index.html">Admin</a></p>
 </footer>
 
-<!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.js"></script>
-<script src="js/config.js"></script>
-<script>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0';
+
+const db = createClient(
+  'https://gsojegpumhdgsejswjnr.supabase.co',
+  'sb_publishable_vBHTI1xkGxnFwFo1vtb9aw_gGh-fALV'
+);
 const form      = document.getElementById('interest-form');
 const submitBtn = document.getElementById('submit-btn');
 const successEl = document.getElementById('form-success');

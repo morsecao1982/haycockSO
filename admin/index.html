@@ -90,7 +90,7 @@
   <div class="admin-topbar">
     <h1>🏆 Haycock SO — Admin Dashboard</h1>
     <a href="../index.html">View Site</a>
-    <button id="logout-btn" onclick="logout()">Sign Out</button>
+    <button id="logout-btn">Sign Out</button>
   </div>
 
   <div class="section">
@@ -124,7 +124,7 @@
           <option value="5th">5th Grade</option>
           <option value="6th">6th Grade</option>
         </select>
-        <button class="btn btn-primary" onclick="exportCSV()" style="padding:8px 18px;font-size:14px;">
+        <button class="btn btn-primary" id="export-btn" style="padding:8px 18px;font-size:14px;">
           ⬇ Export CSV
         </button>
       </div>
@@ -157,10 +157,14 @@
   </div>
 </div>
 
-<!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.js"></script>
-<script src="../js/config.js"></script>
-<script>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0';
+
+const db = createClient(
+  'https://gsojegpumhdgsejswjnr.supabase.co',
+  'sb_publishable_vBHTI1xkGxnFwFo1vtb9aw_gGh-fALV'
+);
+
 let allRows = [];
 
 // ── AUTH CHECK ON LOAD ──────────────────────────────────────────
@@ -319,6 +323,9 @@ function formatDate(iso) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
 }
+
+document.getElementById('logout-btn').addEventListener('click', () => db.auth.signOut());
+document.getElementById('export-btn').addEventListener('click', exportCSV);
 </script>
 
 <script src="../js/nav.js"></script>
