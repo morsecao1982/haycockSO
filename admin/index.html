@@ -287,9 +287,6 @@ function renderTable(rows) {
 // ── CSV EXPORT ───────────────────────────────────────────────────
 function exportCSV() {
   const search = document.getElementById('search-input').value.toLowerCase();
-  const grade = document.getElementById('grade-filter').value;
-  const ret = document.getElementById('returning-filter').value;
-  const search = document.getElementById('search-input').value.toLowerCase();
   const grade  = document.getElementById('grade-filter').value;
   const rows = allRows.filter(r => {
     const text = `${r.student1_name} ${r.student2_name||''} ${r.parent1_email} ${r.parent2_email||''}`.toLowerCase();
