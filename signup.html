@@ -11,7 +11,9 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-brand" href="index.html"><span class="trophy">🏆</span> Haycock SO</a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="events.html">Events</a></li>
@@ -25,130 +27,122 @@
 <div class="page-header">
   <div class="page-header-inner">
     <h1>📝 Interest Form</h1>
-    <p>Tell us about yourself and which events you'd like to participate in.</p>
+    <p>Tell us you're interested — we'll send you the info session link.</p>
   </div>
 </div>
 
 <section class="section">
-  <div class="form-card">
+  <div class="section-inner" style="max-width: 740px;">
 
-    <div id="form-success" class="form-alert success" style="display:none">
-      ✅ <strong>Form submitted!</strong> We received your interest form.
-      We'll be in touch with more details about the team.
+    <!-- INFO BLOCK -->
+    <div style="background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 32px;">
+      <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 14px;">
+        🚀 Get ready to explore, build, and have fun!
+      </h2>
+      <p style="margin-bottom: 12px; color: var(--text-light);">
+        Science Olympiad Division B is a middle-school competition featuring challenges in biology, chemistry, engineering, physics, earth science, and technology. It is a great opportunity for students ready for advanced scientific problem-solving, hands-on challenges, and teamwork.
+      </p>
+      <p style="margin-bottom: 12px; color: var(--text-light);">
+        <strong style="color: var(--text);">Students in 5th and 6th grades are invited to participate.</strong>
+        Fifth graders may also choose Division A, the elementary-school division, which is less complex and demanding; however, students may participate in only one division.
+      </p>
+      <div class="announce" style="margin-bottom: 0;">
+        <span class="announce-icon">📅</span>
+        <div class="announce-text">
+          <strong>Information Session — September 2</strong>
+          <span>Fill out this form or email <a href="mailto:Haycock2027SO@gmail.com">Haycock2027SO@gmail.com</a> with your student's name and grade to receive the meeting link.</span>
+        </div>
+      </div>
     </div>
-    <div id="form-error" class="form-alert error" style="display:none">
-      ❌ <strong>Submission failed.</strong> Please try again or email the coach directly.
-      <span id="error-detail" style="display:block;margin-top:4px;font-size:12px;"></span>
+
+    <!-- FORM -->
+    <div class="form-card">
+      <div id="form-success" class="form-alert success" style="display:none">
+        ✅ <strong>Thank you!</strong> We received your interest form. You'll get the info session link at the email you provided.
+      </div>
+      <div id="form-error" class="form-alert error" style="display:none">
+        ❌ <strong>Submission failed.</strong> Please try again or email us directly at
+        <a href="mailto:Haycock2027SO@gmail.com">Haycock2027SO@gmail.com</a>.
+        <span id="error-detail" style="display:block;margin-top:4px;font-size:12px;"></span>
+      </div>
+
+      <form id="interest-form" novalidate>
+
+        <!-- STUDENT INFORMATION -->
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 18px; padding-bottom: 8px; border-bottom: 2px solid var(--border);">
+          Student Information
+        </h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Student 1 — Full Name <span class="req">*</span></label>
+            <input type="text" name="student1_name" required placeholder="First and last name">
+          </div>
+          <div class="form-group">
+            <label>Student 1 — Grade <span class="req">*</span></label>
+            <select name="student1_grade" required>
+              <option value="">Select grade…</option>
+              <option value="5th">5th Grade</option>
+              <option value="6th">6th Grade</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Student 2 — Full Name <span style="font-size:12px;color:var(--text-light);font-weight:400;">(if applicable)</span></label>
+            <input type="text" name="student2_name" placeholder="First and last name">
+          </div>
+          <div class="form-group">
+            <label>Student 2 — Grade <span style="font-size:12px;color:var(--text-light);font-weight:400;">(if applicable)</span></label>
+            <select name="student2_grade">
+              <option value="">Select grade…</option>
+              <option value="5th">5th Grade</option>
+              <option value="6th">6th Grade</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- PARENT INFORMATION -->
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--primary); margin: 28px 0 18px; padding-bottom: 8px; border-bottom: 2px solid var(--border);">
+          Parent / Guardian Contact Information
+        </h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Parent/Guardian 1 — Email <span class="req">*</span></label>
+            <input type="email" name="parent1_email" required placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label>Parent/Guardian 1 — Phone <span class="req">*</span></label>
+            <input type="tel" name="parent1_phone" required placeholder="(555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Parent/Guardian 2 — Email <span style="font-size:12px;color:var(--text-light);font-weight:400;">(optional)</span></label>
+            <input type="email" name="parent2_email" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label>Parent/Guardian 2 — Phone <span style="font-size:12px;color:var(--text-light);font-weight:400;">(optional)</span></label>
+            <input type="tel" name="parent2_phone" placeholder="(555) 000-0000">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submit-btn" style="width:100%;padding:14px;font-size:16px;margin-top:8px;">
+          Submit Interest Form
+        </button>
+
+      </form>
     </div>
 
-    <form id="interest-form" novalidate>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Student First Name <span class="req">*</span></label>
-          <input type="text" name="first_name" required placeholder="First name">
-        </div>
-        <div class="form-group">
-          <label>Student Last Name <span class="req">*</span></label>
-          <input type="text" name="last_name" required placeholder="Last name">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Grade <span class="req">*</span></label>
-          <select name="grade" required>
-            <option value="">Select grade…</option>
-            <option value="6">6th Grade</option>
-            <option value="7">7th Grade</option>
-            <option value="8">8th Grade</option>
-            <option value="9">9th Grade</option>
-            <option value="10">10th Grade</option>
-            <option value="11">11th Grade</option>
-            <option value="12">12th Grade</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Returning Member?</label>
-          <select name="returning">
-            <option value="no">No — first year</option>
-            <option value="yes">Yes — returning member</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Parent/Guardian Email <span class="req">*</span></label>
-        <input type="email" name="parent_email" required placeholder="parent@email.com">
-        <span class="hint">Primary contact for team communications.</span>
-      </div>
-
-      <div class="form-group">
-        <label>Student Email</label>
-        <input type="email" name="student_email" placeholder="student@email.com (optional)">
-      </div>
-
-      <div class="form-group">
-        <label>Phone (Parent)</label>
-        <input type="tel" name="phone" placeholder="(555) 000-0000">
-      </div>
-
-      <!-- EVENTS OF INTEREST -->
-      <div class="form-group">
-        <label>Events of Interest <span class="req">*</span></label>
-        <span class="hint">Select all events you'd like to be considered for. You'll be assigned 2–3.</span>
-        <div class="checkbox-grid mt-8">
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Anatomy & Physiology"> Anatomy &amp; Physiology</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Boomilever"> Boomilever</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Botany"> Botany</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Circuit Lab"> Circuit Lab</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Codebusters"> Codebusters</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Crime Busters"> Crime Busters</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Disease Detectives"> Disease Detectives</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Dynamic Planet"> Dynamic Planet</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Elastic Launched Gliders"> Elastic Launched Gliders</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Experimental Design"> Experimental Design</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Food Science"> Food Science</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Heredity"> Heredity</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Hovercraft"> Hovercraft</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Meteorology"> Meteorology</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Ping-Pong Parachute"> Ping-Pong Parachute</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Remote Sensing"> Remote Sensing</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Rocks & Minerals"> Rocks &amp; Minerals</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Roller Coaster"> Roller Coaster</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Scrambler"> Scrambler</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Solar System"> Solar System</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Thermodynamics"> Thermodynamics</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Water Quality"> Water Quality</label>
-          <label class="checkbox-item"><input type="checkbox" name="events" value="Write It Do It"> Write It Do It</label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Prior Science Olympiad Experience</label>
-        <select name="experience">
-          <option value="none">No prior experience</option>
-          <option value="1year">1 year</option>
-          <option value="2years">2 years</option>
-          <option value="3plus">3+ years</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Anything else you'd like us to know?</label>
-        <textarea name="notes" placeholder="Special skills, scheduling conflicts, questions, etc."></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary" id="submit-btn" style="width:100%;padding:14px;font-size:16px;">
-        Submit Interest Form
-      </button>
-
-    </form>
   </div>
 </section>
 
 <footer>
   <p>Haycock Science Olympiad &nbsp;|&nbsp; 2026–2027 Season &nbsp;|&nbsp;
+  <a href="mailto:Haycock2027SO@gmail.com">Haycock2027SO@gmail.com</a> &nbsp;|&nbsp;
   <a href="admin/index.html">Admin</a></p>
 </footer>
 
@@ -156,10 +150,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/config.js"></script>
 <script>
-const form = document.getElementById('interest-form');
+const form      = document.getElementById('interest-form');
 const submitBtn = document.getElementById('submit-btn');
 const successEl = document.getElementById('form-success');
-const errorEl = document.getElementById('form-error');
+const errorEl   = document.getElementById('form-error');
 const errorDetail = document.getElementById('error-detail');
 
 form.addEventListener('submit', async (e) => {
@@ -167,21 +161,14 @@ form.addEventListener('submit', async (e) => {
   errorEl.style.display = 'none';
   successEl.style.display = 'none';
 
-  // Validate required fields
-  const firstName = form.first_name.value.trim();
-  const lastName  = form.last_name.value.trim();
-  const grade     = form.grade.value;
-  const parentEmail = form.parent_email.value.trim();
-  const events    = [...form.querySelectorAll('input[name="events"]:checked')].map(cb => cb.value);
+  const student1Name  = form.student1_name.value.trim();
+  const student1Grade = form.student1_grade.value;
+  const parent1Email  = form.parent1_email.value.trim();
+  const parent1Phone  = form.parent1_phone.value.trim();
 
-  if (!firstName || !lastName || !grade || !parentEmail) {
+  if (!student1Name || !student1Grade || !parent1Email || !parent1Phone) {
     errorEl.style.display = 'block';
     errorDetail.textContent = 'Please fill in all required fields.';
-    return;
-  }
-  if (events.length === 0) {
-    errorEl.style.display = 'block';
-    errorDetail.textContent = 'Please select at least one event of interest.';
     return;
   }
 
@@ -189,20 +176,18 @@ form.addEventListener('submit', async (e) => {
   submitBtn.textContent = 'Submitting…';
 
   const payload = {
-    first_name:    firstName,
-    last_name:     lastName,
-    grade:         parseInt(grade),
-    is_returning:  form.returning.value,
-    parent_email:  parentEmail,
-    student_email: form.student_email.value.trim() || null,
-    phone:         form.phone.value.trim() || null,
-    events:        events,
-    experience:    form.experience.value,
-    notes:         form.notes.value.trim() || null,
+    student1_name:  student1Name,
+    student1_grade: student1Grade,
+    student2_name:  form.student2_name.value.trim() || null,
+    student2_grade: form.student2_grade.value || null,
+    parent1_email:  parent1Email,
+    parent1_phone:  parent1Phone,
+    parent2_email:  form.parent2_email.value.trim() || null,
+    parent2_phone:  form.parent2_phone.value.trim() || null,
   };
 
   try {
-    const { error } = await db.from('submissions').insert([payload]);
+    const { error } = await db.from('interest_submissions').insert([payload]);
     if (error) throw error;
     form.style.display = 'none';
     successEl.style.display = 'block';
@@ -216,7 +201,6 @@ form.addEventListener('submit', async (e) => {
   }
 });
 </script>
-
 <script src="js/nav.js"></script>
 </body>
 </html>

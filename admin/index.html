@@ -107,32 +107,22 @@
           <div class="stat-label">New (last 7 days)</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" id="stat-returning">—</div>
-          <div class="stat-label">Returning Members</div>
+          <div class="stat-num" id="stat-5th">—</div>
+          <div class="stat-label">5th Graders</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" id="stat-events">—</div>
-          <div class="stat-label">Unique Events Requested</div>
+          <div class="stat-num" id="stat-6th">—</div>
+          <div class="stat-label">6th Graders</div>
         </div>
       </div>
 
       <!-- FILTER + EXPORT -->
       <div class="filter-bar">
-        <input type="text" id="search-input" placeholder="Search by name, email, or event…">
+        <input type="text" id="search-input" placeholder="Search by name or email…">
         <select id="grade-filter">
           <option value="">All Grades</option>
-          <option value="6">Grade 6</option>
-          <option value="7">Grade 7</option>
-          <option value="8">Grade 8</option>
-          <option value="9">Grade 9</option>
-          <option value="10">Grade 10</option>
-          <option value="11">Grade 11</option>
-          <option value="12">Grade 12</option>
-        </select>
-        <select id="returning-filter">
-          <option value="">All Members</option>
-          <option value="yes">Returning Only</option>
-          <option value="no">New Only</option>
+          <option value="5th">5th Grade</option>
+          <option value="6th">6th Grade</option>
         </select>
         <button class="btn btn-primary" onclick="exportCSV()" style="padding:8px 18px;font-size:14px;">
           ⬇ Export CSV
@@ -145,18 +135,19 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
+              <th>Student 1</th>
               <th>Grade</th>
-              <th>Returning</th>
-              <th>Parent Email</th>
-              <th>Events Interested</th>
-              <th>Experience</th>
-              <th>Notes</th>
+              <th>Student 2</th>
+              <th>Grade</th>
+              <th>Parent 1 Email</th>
+              <th>Parent 1 Phone</th>
+              <th>Parent 2 Email</th>
+              <th>Parent 2 Phone</th>
               <th>Submitted</th>
             </tr>
           </thead>
           <tbody id="table-body">
-            <tr><td colspan="9" class="no-results">Loading…</td></tr>
+            <tr><td colspan="10" class="no-results">Loading…</td></tr>
           </tbody>
         </table>
       </div>
@@ -224,13 +215,13 @@ function showDashboard() {
 // ── LOAD DATA ────────────────────────────────────────────────────
 async function loadSubmissions() {
   const { data, error } = await db
-    .from('submissions')
+    .from('interest_submissions')
     .select('*')
     .order('created_at', { ascending: false });
 
   if (error) {
     document.getElementById('table-body').innerHTML =
-      `<tr><td colspan="9" class="no-results" style="color:var(--error);">Error: ${error.message}</td></tr>`;
+      `<tr><td colspan="10" class="no-results" style="color:var(--error);">Error: ${error.message}</td></tr>`;
     return;
   }
 
@@ -238,22 +229,18 @@ async function loadSubmissions() {
   updateStats(allRows);
   renderTable(allRows);
 
-  // live search / filter
   document.getElementById('search-input').addEventListener('input', applyFilters);
   document.getElementById('grade-filter').addEventListener('change', applyFilters);
-  document.getElementById('returning-filter').addEventListener('change', applyFilters);
 }
 
 function applyFilters() {
-  const q = document.getElementById('search-input').value.toLowerCase();
+  const q     = document.getElementById('search-input').value.toLowerCase();
   const grade = document.getElementById('grade-filter').value;
-  const ret = document.getElementById('returning-filter').value;
 
   const filtered = allRows.filter(r => {
-    const text = `${r.first_name} ${r.last_name} ${r.parent_email} ${(r.events||[]).join(' ')}`.toLowerCase();
+    const text = `${r.student1_name} ${r.student2_name||''} ${r.parent1_email} ${r.parent2_email||''}`.toLowerCase();
     if (q && !text.includes(q)) return false;
-    if (grade && String(r.grade) !== grade) return false;
-    if (ret && r.is_returning !== ret) return false;
+    if (grade && r.student1_grade !== grade && r.student2_grade !== grade) return false;
     return true;
   });
   renderTable(filtered);
@@ -261,12 +248,14 @@ function applyFilters() {
 
 function updateStats(rows) {
   const sevenDaysAgo = new Date(Date.now() - 7*24*3600*1000).toISOString();
-  const allEvents = new Set(rows.flatMap(r => r.events || []));
+  // count individual students (student2 optional)
+  const all5th = rows.filter(r => r.student1_grade === '5th' || r.student2_grade === '5th').length;
+  const all6th = rows.filter(r => r.student1_grade === '6th' || r.student2_grade === '6th').length;
 
   document.getElementById('stat-total').textContent = rows.length;
-  document.getElementById('stat-new').textContent = rows.filter(r => r.created_at >= sevenDaysAgo).length;
-  document.getElementById('stat-returning').textContent = rows.filter(r => r.is_returning === 'yes').length;
-  document.getElementById('stat-events').textContent = allEvents.size;
+  document.getElementById('stat-new').textContent   = rows.filter(r => r.created_at >= sevenDaysAgo).length;
+  document.getElementById('stat-5th').textContent   = all5th;
+  document.getElementById('stat-6th').textContent   = all6th;
 }
 
 function renderTable(rows) {
@@ -275,23 +264,21 @@ function renderTable(rows) {
     `Showing ${rows.length} of ${allRows.length} submission${allRows.length !== 1 ? 's' : ''}`;
 
   if (rows.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="9" class="no-results">No submissions found.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10" class="no-results">No submissions found.</td></tr>';
     return;
   }
 
   tbody.innerHTML = rows.map((r, i) => `
     <tr>
       <td style="color:var(--text-light);font-size:13px;">${i + 1}</td>
-      <td><strong>${esc(r.first_name)} ${esc(r.last_name)}</strong></td>
-      <td>${r.grade ? `Grade ${r.grade}` : '—'}</td>
-      <td>${r.is_returning === 'yes'
-        ? '<span class="badge badge-gold">Returning</span>'
-        : '<span class="badge badge-blue">New</span>'}</td>
-      <td><a href="mailto:${esc(r.parent_email)}" style="color:var(--primary);">${esc(r.parent_email)}</a></td>
-      <td><div class="events-cell">${(r.events||[]).map(ev =>
-        `<span class="badge badge-blue" style="font-size:11px;">${esc(ev)}</span>`).join('')}</div></td>
-      <td>${formatExp(r.experience)}</td>
-      <td style="max-width:200px;font-size:13px;color:var(--text-light);">${esc(r.notes || '—')}</td>
+      <td><strong>${esc(r.student1_name)}</strong></td>
+      <td><span class="badge badge-blue">${esc(r.student1_grade)}</span></td>
+      <td>${r.student2_name ? `<strong>${esc(r.student2_name)}</strong>` : '<span style="color:var(--text-light)">—</span>'}</td>
+      <td>${r.student2_grade ? `<span class="badge badge-blue">${esc(r.student2_grade)}</span>` : '—'}</td>
+      <td><a href="mailto:${esc(r.parent1_email)}" style="color:var(--primary);">${esc(r.parent1_email)}</a></td>
+      <td style="white-space:nowrap;">${esc(r.parent1_phone)}</td>
+      <td>${r.parent2_email ? `<a href="mailto:${esc(r.parent2_email)}" style="color:var(--primary);">${esc(r.parent2_email)}</a>` : '—'}</td>
+      <td style="white-space:nowrap;">${r.parent2_phone ? esc(r.parent2_phone) : '—'}</td>
       <td style="white-space:nowrap;font-size:13px;color:var(--text-light);">${formatDate(r.created_at)}</td>
     </tr>
   `).join('');
@@ -302,28 +289,26 @@ function exportCSV() {
   const search = document.getElementById('search-input').value.toLowerCase();
   const grade = document.getElementById('grade-filter').value;
   const ret = document.getElementById('returning-filter').value;
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const grade  = document.getElementById('grade-filter').value;
   const rows = allRows.filter(r => {
-    const text = `${r.first_name} ${r.last_name} ${r.parent_email} ${(r.events||[]).join(' ')}`.toLowerCase();
+    const text = `${r.student1_name} ${r.student2_name||''} ${r.parent1_email} ${r.parent2_email||''}`.toLowerCase();
     if (search && !text.includes(search)) return false;
-    if (grade && String(r.grade) !== grade) return false;
-    if (ret && r.is_returning !== ret) return false;
+    if (grade && r.student1_grade !== grade && r.student2_grade !== grade) return false;
     return true;
   });
 
-  const cols = ['first_name','last_name','grade','returning','parent_email','student_email','phone','events','experience','notes','created_at'];
+  const cols = ['student1_name','student1_grade','student2_name','student2_grade','parent1_email','parent1_phone','parent2_email','parent2_phone','created_at'];
   const header = cols.join(',');
   const csvRows = rows.map(r =>
-    cols.map(c => {
-      const v = c === 'events' ? (r[c]||[]).join('; ') : (r[c] ?? '');
-      return `"${String(v).replace(/"/g, '""')}"`;
-    }).join(',')
+    cols.map(c => `"${String(r[c] ?? '').replace(/"/g, '""')}"`).join(',')
   );
 
   const blob = new Blob([header + '\n' + csvRows.join('\n')], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `haycock-so-submissions-${new Date().toISOString().slice(0,10)}.csv`;
+  a.download = `haycock-so-interest-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -336,10 +321,6 @@ function esc(s) {
 function formatDate(iso) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
-}
-function formatExp(v) {
-  const map = { none: 'None', '1year': '1 year', '2years': '2 years', '3plus': '3+ years' };
-  return map[v] || v || '—';
 }
 </script>
 
