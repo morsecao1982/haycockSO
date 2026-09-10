@@ -1,0 +1,729 @@
+<title>Haycock Science Olympiad</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Literata:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ink: #16233d;
+    --ink-soft: #3c4a63;
+    --paper: #eef1f2;
+    --surface: #ffffff;
+    --surface-2: #e4e9eb;
+    --line: #cdd7dc;
+    --brass: #a9761f;
+    --brass-bright: #c9922f;
+    --teal: #1f5f5f;
+    --teal-bright: #2b7a7a;
+    --alert: #8a3324;
+    --alert-bright: #b5482f;
+    --shadow: 220 30% 20%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e9e6da;
+      --ink-soft: #b3ad9a;
+      --paper: #101a2c;
+      --surface: #17233a;
+      --surface-2: #1e2c46;
+      --line: #2b3a56;
+      --brass: #e3b056;
+      --brass-bright: #f0c576;
+      --teal: #4fa6a6;
+      --teal-bright: #6cc0c0;
+      --alert: #d97759;
+      --alert-bright: #e8927a;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #e9e6da;
+    --ink-soft: #b3ad9a;
+    --paper: #101a2c;
+    --surface: #17233a;
+    --surface-2: #1e2c46;
+    --line: #2b3a56;
+    --brass: #e3b056;
+    --brass-bright: #f0c576;
+    --teal: #4fa6a6;
+    --teal-bright: #6cc0c0;
+    --alert: #d97759;
+    --alert-bright: #e8927a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Literata', Georgia, 'Times New Roman', serif;
+    overscroll-behavior: none;
+  }
+
+  .display {
+    font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  a { color: var(--teal-bright); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--brass-bright); outline-offset: 3px; }
+
+  /* --- conflict-block ruler: a running motif referencing the 6 real
+     scheduling blocks + Self-Scheduled from data/scheduling_groups.csv --- */
+  .block-ruler {
+    display: flex;
+    gap: 3px;
+    height: 5px;
+    width: 100%;
+  }
+  .block-ruler span { flex: 1; border-radius: 1px; }
+  .block-ruler span:nth-child(1) { background: #6b8f9c; }
+  .block-ruler span:nth-child(2) { background: #4f8a8a; }
+  .block-ruler span:nth-child(3) { background: var(--teal-bright); }
+  .block-ruler span:nth-child(4) { background: #8aa060; }
+  .block-ruler span:nth-child(5) { background: var(--brass); }
+  .block-ruler span:nth-child(6) { background: var(--brass-bright); }
+  .block-ruler span:nth-child(7) { background: #b0632f; }
+
+  /* --- deck shell --- */
+  .deck {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    padding: clamp(28px, 4vw, 56px) clamp(32px, 6vw, 88px) clamp(64px, 6vw, 80px);
+    opacity: 0;
+  }
+  .slide.active {
+    display: flex;
+    opacity: 1;
+    animation: rise 480ms cubic-bezier(.16,.9,.2,1);
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slide.active { animation: none; }
+  }
+
+  .slide-head { flex-shrink: 0; margin-bottom: clamp(16px, 3vh, 32px); }
+  .slide-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(14px, 2.4vh, 26px);
+    max-width: 1180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .slide-body.wide { max-width: none; }
+  #slide-7 .slide-body { justify-content: flex-start; }
+
+  .kicker {
+    font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+    line-height: 0.98;
+    margin: 0.2em 0 0;
+    color: var(--ink);
+  }
+
+  p.lede {
+    font-size: clamp(1.02rem, 1.5vw, 1.22rem);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  /* --- title slide --- */
+  #slide-0 { justify-content: center; align-items: flex-start; }
+  #slide-0 .title-block { max-width: 900px; }
+  #slide-0 .display.hero {
+    font-size: clamp(3.4rem, 9.5vw, 7.6rem);
+    line-height: 0.88;
+    margin: 0.14em 0 0;
+  }
+  #slide-0 .tagline {
+    margin-top: clamp(20px, 3vh, 34px);
+    display: flex;
+    gap: clamp(20px, 4vw, 48px);
+    flex-wrap: wrap;
+  }
+  .stat-chip { display: flex; flex-direction: column; gap: 2px; }
+  .stat-chip .num { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 2.1rem; color: var(--brass); line-height: 1; }
+  .stat-chip .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* --- reusable two-column --- */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(20px, 3vw, 48px);
+  }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: clamp(18px, 2.4vw, 28px);
+  }
+  .card h3 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 0 0 0.5em;
+    letter-spacing: 0.01em;
+  }
+  .card p { margin: 0; color: var(--ink-soft); line-height: 1.55; font-size: 0.98rem; }
+  .card.accent-teal { border-top: 4px solid var(--teal); }
+  .card.accent-brass { border-top: 4px solid var(--brass); }
+
+  ul.plain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  ul.plain li { padding-left: 1.3em; position: relative; color: var(--ink-soft); line-height: 1.5; }
+  ul.plain li::before {
+    content: '';
+    position: absolute; left: 0; top: 0.55em;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--teal);
+  }
+  ul.plain.brass li::before { background: var(--brass); }
+
+  .links-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 4px; }
+  .links-row a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+
+  /* --- stats table (slide 3) --- */
+  .stat-highlight {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .stat-highlight .big {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.4rem, 8vw, 6rem);
+    color: var(--brass);
+    line-height: 0.85;
+  }
+  .stat-highlight .caption { color: var(--ink-soft); max-width: 34ch; font-size: 0.98rem; line-height: 1.5; }
+
+  table.results {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.results th, table.results td {
+    text-align: right;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+  }
+  table.results th:first-child, table.results td:first-child { text-align: left; }
+  table.results thead th {
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 500; border-bottom: 2px solid var(--line);
+  }
+  table.results tbody tr:hover { background: var(--surface-2); }
+  table.results td.best { color: var(--brass); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+  .source-note { font-size: 0.78rem; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; margin-top: 2px; }
+
+  /* --- how-it-works numbers (slide 4) --- */
+  .num-row { display: flex; gap: clamp(16px, 3vw, 40px); flex-wrap: wrap; }
+  .num-tile { flex: 1 1 180px; }
+  .num-tile .big {
+    font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+    font-size: clamp(2.6rem, 5vw, 4.2rem); color: var(--teal); line-height: 0.88;
+  }
+  .num-tile .cap { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.4; margin-top: 4px; max-width: 22ch; }
+
+  /* --- mandatory dates slide --- */
+  .alert-box {
+    border: 1px solid var(--alert);
+    background: color-mix(in srgb, var(--alert) 9%, var(--surface));
+    border-radius: 10px;
+    padding: clamp(16px, 2.4vw, 24px) clamp(18px, 2.6vw, 28px);
+  }
+  .alert-box .eyebrow { color: var(--alert-bright); }
+  .alert-box p { margin: 0.4em 0 0; color: var(--ink); font-weight: 500; line-height: 1.5; }
+  .date-row {
+    display: flex; flex-wrap: wrap; gap: 10px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .date-chip {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; padding: 8px 12px; font-size: 0.88rem;
+  }
+  .date-chip.tbc { color: var(--ink-soft); border-style: dashed; }
+
+  /* --- events grid (slide 7) --- */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+  }
+  .event-group {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .event-group .grp-head {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 8px 12px; color: #fff;
+  }
+  .event-group ul { list-style: none; margin: 0; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .event-group li { font-size: 0.88rem; display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .event-group li .tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem;
+    color: var(--ink-soft); letter-spacing: 0.05em; white-space: nowrap;
+  }
+
+  /* --- quote-style callout (slide 9) --- */
+  .callout {
+    border-left: 3px solid var(--brass);
+    padding-left: 20px;
+    font-family: 'Literata', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  /* --- final CTA slide --- */
+  .cta-box {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(20px, 3vw, 34px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cta-box .big-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--teal-bright);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    width: fit-content;
+  }
+
+  /* --- nav chrome --- */
+  .nav {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 4vw, 56px);
+    background: linear-gradient(to top, var(--paper) 60%, transparent);
+    z-index: 20;
+  }
+  .nav-btns { display: flex; gap: 10px; align-items: center; }
+  .nav button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  .nav button:hover { border-color: var(--teal); color: var(--teal-bright); }
+  .nav button:disabled { opacity: 0.35; cursor: default; }
+  .nav .counter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .dots { display: flex; gap: 6px; }
+  .dots button {
+    width: 7px; height: 7px; padding: 0; border-radius: 50%;
+    background: var(--line); border: none;
+  }
+  .dots button.on { background: var(--teal); width: 18px; border-radius: 4px; }
+
+  .top-ruler { position: fixed; top: 0; left: 0; right: 0; z-index: 20; }
+
+  .footer-id {
+    position: fixed; top: 10px; right: clamp(20px, 4vw, 56px);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.08em; color: var(--ink-soft); z-index: 20;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .footer-id { display: none; }
+  }
+</style>
+
+<div class="top-ruler block-ruler">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+<div class="footer-id">Haycock ES &middot; Division B</div>
+
+<div class="deck" id="deck">
+
+  <!-- 0: TITLE -->
+  <section class="slide active" id="slide-0">
+    <div class="slide-body" style="justify-content:center;">
+      <div class="eyebrow">Haycock Elementary &middot; Falls Church, VA</div>
+      <div class="title-block">
+        <div class="display hero">Science<br>Olympiad</div>
+      </div>
+      <p class="lede" style="font-size:clamp(1.1rem,2vw,1.4rem); color:var(--ink);">Division B &middot; First Information Session</p>
+      <div class="tagline">
+        <div class="stat-chip"><span class="num mono">15</span><span class="lbl">Students / Team</span></div>
+        <div class="stat-chip"><span class="num mono">23</span><span class="lbl">Events</span></div>
+        <div class="stat-chip"><span class="num mono">2</span><span class="lbl">Teams Fielded</span></div>
+        <div class="stat-chip"><span class="num mono">2026&ndash;27</span><span class="lbl">Season</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1: WHAT IS SCIENCE OLYMPIAD -->
+  <section class="slide" id="slide-1">
+    <div class="slide-head">
+      <div class="eyebrow">01 &middot; The Competition</div>
+      <h2 class="display kicker">What Is Science Olympiad?</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lede">Science Olympiad is a national STEM competition where teams of students compete across events spanning life science, earth &amp; space science, physical science, engineering, and inquiry &mdash; through written tests, hands-on labs, and built devices.</p>
+      <div class="split">
+        <div class="card accent-teal">
+          <h3>Division A</h3>
+          <p>Nationally grades K&ndash;6 (split A1/A2). At Haycock, our 3rd and 4th graders compete here.</p>
+        </div>
+        <div class="card accent-brass">
+          <h3>Division B</h3>
+          <p>Nationally grades 6&ndash;9 &mdash; this is Haycock's team. As a K&ndash;6 school with no middle-school grades of our own, our 5th and 6th graders move up into Division B under Science Olympiad's own rule for schools with no in-range team available.</p>
+        </div>
+      </div>
+      <p class="lede" style="font-weight:600; color:var(--ink);">A 5th grader may compete in Division A <u>or</u> Division B &mdash; not both in the same year. This is a one-team commitment.</p>
+      <div class="links-row">
+        <a href="https://www.soinc.org" target="_blank" rel="noopener">soinc.org &rarr; national rules &amp; divisions</a>
+        <a href="https://www.virginiaso.org" target="_blank" rel="noopener">virginiaso.org &rarr; Virginia tournaments</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2: WE ARE DIVISION B -->
+  <section class="slide" id="slide-2">
+    <div class="slide-head">
+      <div class="eyebrow">02 &middot; Our Team</div>
+      <h2 class="display kicker">Haycock ES Division B</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lede">5th and 6th graders only.</p>
+      <div class="split">
+        <div class="card">
+          <h3>Coaches</h3>
+          <ul class="plain">
+            <li><strong>Katia</strong> &mdash; Head Coach</li>
+            <li><strong>Miao</strong> &mdash; Assistant Coach</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Get In Touch</h3>
+          <ul class="plain brass">
+            <li class="mono">Haycock2027SO@gmail.com</li>
+            <li class="mono">haycockso.vercel.app <span style="color:var(--ink-soft); font-style:italic;">(beta)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3: TRACK RECORD -->
+  <section class="slide" id="slide-3">
+    <div class="slide-head">
+      <div class="eyebrow">03 &middot; Track Record</div>
+      <h2 class="display kicker">Haycock ES &mdash; One Of The Strongest Elementary Schools In Division B</h2>
+    </div>
+    <div class="slide-body wide">
+      <p class="lede">We typically field <strong>two full teams</strong> &mdash; 30 student spots each season.</p>
+      <div class="split" style="align-items:center;">
+        <div class="stat-highlight">
+          <div class="big mono">38</div>
+          <div class="caption">top-6 individual event finishes at States across the last six years (2021&ndash;2026) &mdash; including the team's best finish, <strong style="color:var(--brass);">3rd place</strong> overall in 2024.</div>
+        </div>
+        <div class="table-wrap">
+          <table class="results">
+            <thead>
+              <tr><th>Year</th><th>Rank</th><th>Score</th><th>Field</th><th>Top-6</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2021</td><td>14th</td><td>252</td><td>24</td><td>3</td></tr>
+              <tr><td>2022</td><td>9th</td><td>243</td><td>24</td><td>7</td></tr>
+              <tr><td>2023</td><td>5th</td><td>218</td><td>24</td><td>5</td></tr>
+              <tr class="best"><td>2024</td><td class="best">3rd</td><td>154</td><td>27</td><td class="best">13</td></tr>
+              <tr><td>2025</td><td>7th</td><td>238</td><td>26</td><td>7</td></tr>
+              <tr><td>2026</td><td>14th</td><td>296</td><td>29</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="source-note">Source: Virginia Science Olympiad State Tournament results, duosmium.org &middot; lower score wins</div>
+    </div>
+  </section>
+
+  <!-- 4: HOW DIV B WORKS -->
+  <section class="slide" id="slide-4">
+    <div class="slide-head">
+      <div class="eyebrow">04 &middot; The Format</div>
+      <h2 class="display kicker">How Division B Works</h2>
+    </div>
+    <div class="slide-body">
+      <div class="num-row">
+        <div class="num-tile"><div class="big mono">15</div><div class="cap">students on each team</div></div>
+        <div class="num-tile"><div class="big mono">23</div><div class="cap">events to cover, every one required</div></div>
+        <div class="num-tile"><div class="big mono">3&ndash;4</div><div class="cap">events per student &mdash; most do 3, three students per team take on 4</div></div>
+        <div class="num-tile"><div class="big mono">2</div><div class="cap">students represent Haycock at most events &mdash; rarely 3</div></div>
+      </div>
+      <p class="lede">Students are paired up for each event and prepare together &mdash; sharing the workload, the study time, and the credit.</p>
+    </div>
+  </section>
+
+  <!-- 5: THE COMMITMENT -->
+  <section class="slide" id="slide-5">
+    <div class="slide-head">
+      <div class="eyebrow">05 &middot; Time &amp; Effort</div>
+      <h2 class="display kicker">Not A Drop-Off Activity</h2>
+    </div>
+    <div class="slide-body">
+      <div class="split">
+        <div class="card accent-teal">
+          <h3>Students</h3>
+          <p>At least <strong style="color:var(--ink);">2 hours a week, per event</strong>, studying together. Complex written events and builds routinely take longer to get good at.</p>
+        </div>
+        <div class="card accent-brass">
+          <h3>Parents</h3>
+          <p>Every family mentors <strong style="color:var(--ink);">1&ndash;2 events</strong>. That means making sure your kids are prepared &mdash; folders and cheat sheets ready, studying and teaching alongside them, running practice tests.</p>
+        </div>
+      </div>
+      <p class="lede" style="font-weight:600; color:var(--ink);">This only works if parents mentor. Please plan for that before you apply.</p>
+    </div>
+  </section>
+
+  <!-- 6: MANDATORY TOURNAMENTS -->
+  <section class="slide" id="slide-6">
+    <div class="slide-head">
+      <div class="eyebrow">06 &middot; Tournament Calendar</div>
+      <h2 class="display kicker">Participation Is Mandatory</h2>
+    </div>
+    <div class="slide-body">
+      <div class="date-row">
+        <span class="date-chip">Dec 5</span>
+        <span class="date-chip">Jan 9</span>
+        <span class="date-chip tbc">Feb 13 (TBC)</span>
+        <span class="date-chip tbc">Feb 20 (TBC)</span>
+        <span class="date-chip">Feb 27</span>
+        <span class="date-chip">Apr 10 &mdash; if you qualify</span>
+      </div>
+      <div class="alert-box">
+        <div class="eyebrow">No Exceptions</div>
+        <p>Every one of these runs a full day and may require travel and an overnight stay (State). No individual accommodation can be made for a student's event timing.</p>
+        <p>If you cannot make every date above, please do not apply.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7: EVENTS + SCHEDULE CONFLICTS -->
+  <section class="slide" id="slide-7">
+    <div class="slide-head">
+      <div class="eyebrow">07 &middot; The Event List</div>
+      <h2 class="display kicker">23 Events, 7 Schedule Blocks</h2>
+    </div>
+    <div class="slide-body wide">
+      <p class="lede">Events sharing a block run at the same time at tournaments &mdash; no student can be scheduled into two events in the same block. "Self-Scheduled" events can be done any time.</p>
+      <div class="events-grid">
+        <div class="event-group">
+          <div class="grp-head" style="background:#6b8f9c;">Block 1</div>
+          <ul><li>Codebusters <span class="tag">3&middot;INQ</span></li><li>Disease Detectives <span class="tag">2&middot;LS</span></li><li>Remote Sensing <span class="tag">2&middot;ESS</span></li></ul>
+        </div>
+        <div class="event-group">
+          <div class="grp-head" style="background:#4f8a8a;">Block 2</div>
+          <ul><li>Water Quality <span class="tag">2&middot;LS</span></li><li>Experimental Design <span class="tag">3&middot;INQ</span></li><li>Solar System <span class="tag">2&middot;ESS</span></li></ul>
+        </div>
+        <div class="event-group">
+          <div class="grp-head" style="background:#2b7a7a;">Block 3</div>
+          <ul><li>Botany <span class="tag">2&middot;LS</span></li><li>Meteorology <span class="tag">2&middot;ESS</span></li></ul>
+        </div>
+        <div class="event-group">
+          <div class="grp-head" style="background:#8aa060;">Block 4</div>
+          <ul><li>Circuit Lab <span class="tag">2&middot;PS</span></li><li>Dynamic Planet <span class="tag">2&middot;ESS</span></li><li>Food Science <span class="tag">2&middot;PS</span></li></ul>
+        </div>
+        <div class="event-group">
+          <div class="grp-head" style="background:#a9761f;">Block 5</div>
+          <ul><li>Heredity <span class="tag">2&middot;LS</span></li><li>Rocks &amp; Minerals <span class="tag">2&middot;ESS</span></li><li>Thermodynamics <span class="tag">2&middot;PS</span></li></ul>
+        </div>
+        <div class="event-group">
+          <div class="grp-head" style="background:#c9922f;">Block 6</div>
+          <ul><li>Anatomy &amp; Physiology <span class="tag">2&middot;LS</span></li><li>Crime Busters <span class="tag">2&middot;PS</span></li><li>Write It Do It <span class="tag">2&middot;INQ</span></li></ul>
+        </div>
+        <div class="event-group">
+          <div class="grp-head" style="background:#b0632f;">Self-Scheduled</div>
+          <ul>
+            <li>Boomilever <span class="tag">2&middot;BUILD</span></li>
+            <li>Elastic Launched Gliders <span class="tag">2&middot;BUILD</span></li>
+            <li>Hovercraft <span class="tag">2&middot;BUILD</span></li>
+            <li>Ping-Pong Parachute <span class="tag">2&middot;BUILD</span></li>
+            <li>Roller Coaster <span class="tag">2&middot;BUILD</span></li>
+            <li>Scrambler <span class="tag">2&middot;BUILD</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="links-row">
+        <a href="https://www.soinc.org/events/2027-division-b-events" target="_blank" rel="noopener">soinc.org &rarr; full official event descriptions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8: PREFERENCE COLLECTION -->
+  <section class="slide" id="slide-8">
+    <div class="slide-head">
+      <div class="eyebrow">08 &middot; Communicating Event Preferences</div>
+      <h2 class="display kicker">Sorting Into Events</h2>
+    </div>
+    <div class="slide-body">
+      <div class="split">
+        <div class="card accent-teal">
+          <h3>Option A</h3>
+          <p>Rank your <strong style="color:var(--ink);">top 6 individual events</strong>. We match students to events one at a time, based on preference and fit.</p>
+        </div>
+        <div class="card accent-brass">
+          <h3>Option B</h3>
+          <p>Rank preferred <strong style="color:var(--ink);">event groups</strong> &mdash; pre-set pairings of events students take on together as a set.</p>
+        </div>
+      </div>
+      <p class="lede">Which method we use depends on final enrollment numbers and the 5th/6th grade ratio &mdash; we'll decide once sign-ups close. Either way, we'll ask for your preferences on the Student Intake Form.</p>
+    </div>
+  </section>
+
+  <!-- 9: NEXT STEPS -->
+  <section class="slide" id="slide-10">
+    <div class="slide-head">
+      <div class="eyebrow">09 &middot; What Happens Next</div>
+      <h2 class="display kicker">Interest Isn't The Commitment</h2>
+    </div>
+    <div class="slide-body">
+      <p class="lede">Sharing your email with us today just tells us you're interested. Every family who does will receive a <strong style="color:var(--ink);">Student Intake Form</strong> &mdash; and completing <em>that</em> is the real commitment to participate.</p>
+      <div class="cta-box">
+        <div class="eyebrow">Before You Fill It Out</div>
+        <p style="margin:0; color:var(--ink-soft); line-height:1.55;">It's long, and it asks for a lot &mdash; availability, preferences, achievements, parent involvement. We need all of it to sort every student into events fairly. Please take the time to fill it in completely.</p>
+        <a class="big-link" href="mailto:Haycock2027SO@gmail.com">Haycock2027SO@gmail.com</a>
+        <a class="big-link" href="https://haycockso.vercel.app" target="_blank" rel="noopener">haycockso.vercel.app</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="Previous slide">&larr; Prev</button>
+    <button id="nextBtn" aria-label="Next slide">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="counter mono" id="counter">1 / 10</div>
+</div>
+
+<script>
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total = slides.length;
+    var idx = 0;
+
+    var dotsEl = document.getElementById('dots');
+    slides.forEach(function (_, i) {
+      var b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      b.addEventListener('click', function () { go(i); });
+      dotsEl.appendChild(b);
+    });
+    var dotEls = Array.prototype.slice.call(dotsEl.children);
+
+    var counterEl = document.getElementById('counter');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+
+    function render() {
+      slides.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+      dotEls.forEach(function (d, i) { d.classList.toggle('on', i === idx); });
+      counterEl.textContent = (idx + 1) + ' / ' + total;
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === total - 1;
+      try { sessionStorage.setItem('haycock-info-slide', String(idx)); } catch (e) {}
+    }
+
+    function go(i) {
+      idx = Math.max(0, Math.min(total - 1, i));
+      render();
+    }
+
+    prevBtn.addEventListener('click', function () { go(idx - 1); });
+    nextBtn.addEventListener('click', function () { go(idx + 1); });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { go(idx + 1); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(idx - 1); e.preventDefault(); }
+      else if (e.key === 'Home') { go(0); }
+      else if (e.key === 'End') { go(total - 1); }
+    });
+
+    var startX = null;
+    window.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    window.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 60) { go(idx + (dx < 0 ? 1 : -1)); }
+      startX = null;
+    }, { passive: true });
+
+    try {
+      var saved = sessionStorage.getItem('haycock-info-slide');
+      if (saved !== null) idx = Math.max(0, Math.min(total - 1, parseInt(saved, 10)));
+    } catch (e) {}
+
+    render();
+  })();
+</script>

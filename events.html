@@ -5,6 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events | Haycock Science Olympiad</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .rules-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pill-type   { background: #e8f0fe; color: #1a56db; }
+  .pill-team   { background: #f0fdf4; color: #166534; }
+  .pill-time   { background: #fef9c3; color: #854d0e; }
+  .pill-eye    { background: #fff7ed; color: #9a3412; }
+  .pill-imp    { background: #fdf4ff; color: #6b21a8; }
+
+  .bring-row {
+    font-size: 12.5px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .bring-row strong { color: var(--text); }
+
+  .topics-list {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .topics-list li {
+    font-size: 12.5px;
+    color: var(--text-light);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .topics-list li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .event-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 10px 0;
+  }
+</style>
 </head>
 <body>
 
@@ -27,26 +85,41 @@
 <div class="page-header">
   <div class="page-header-inner">
     <h1>🔬 Events</h1>
-    <p>All 23 official Division B events for the 2026–2027 season. Source: <a href="https://www.soinc.org/events/2027-division-b-events" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.8);">soinc.org</a></p>
+    <p>All 23 official Division B events for the 2026–2027 season — with key rules from the official manual. Source: <a href="https://www.soinc.org" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.8);">soinc.org</a></p>
   </div>
 </div>
 
 <section class="section">
   <div class="section-inner">
 
-    <div class="cat-header">🧬 Life, Personal &amp; Social Science</div>
+    <!-- ══════════════════════════════════════════
+         LIFE SCIENCE
+    ══════════════════════════════════════════ -->
+    <div class="cat-header">🧬 Life Science</div>
     <div class="card-grid">
 
       <div class="event-card">
         <div class="event-card-header">
-          <span class="event-icon">🫀</span>
-          <div><div class="event-cat">Life Science</div><h3>Anatomy &amp; Physiology</h3></div>
+          <span class="event-icon">🫁</span>
+          <div><div class="event-cat">Life Science · Core Knowledge</div><h3>Anatomy &amp; Physiology</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants will be assessed on their understanding of the anatomy and physiology for the Nervous, Special Senses, and Endocrine Systems.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test / lab stations</span>
+          </div>
+          <p>Participants are assessed on their understanding of the anatomy and physiology of the <strong>Respiratory, Digestive, and Immune Systems</strong> of the human body.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper (both sides), 2 Class II calculators</div>
+          <ul class="topics-list">
+            <li>Respiratory: spirograms, gas exchange, COPD, asthma, emphysema</li>
+            <li>Digestive: alimentary canal, chemical digestion, ulcers, hepatitis</li>
+            <li>Immune: innate vs. adaptive immunity, HIV/AIDS, autoimmune diseases, hypersensitivities</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/anatomy-physiology" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Anatomy_%26_Physiology" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/anatomy-physiology" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Anatomy_%26_Physiology" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -54,13 +127,26 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🌿</span>
-          <div><div class="event-cat">Life Science</div><h3>Botany</h3></div>
+          <div><div class="event-cat">Life Science · Core Knowledge</div><h3>Botany</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Students demonstrate knowledge of plant biology, plant identification, ecology, and plant physiology.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test / stations</span>
+          </div>
+          <p>Participants demonstrate their knowledge of plant life and general botany principles. Supervisors may provide live/preserved specimens and microscopes.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper (both sides), 2 Class II calculators</div>
+          <ul class="topics-list">
+            <li>Plant cell structure, roots, stems, leaves, flowers</li>
+            <li>Photosynthesis, plant genetics &amp; reproduction</li>
+            <li>Major plant groups (monocot/dicot, embryophytes, algae)</li>
+            <li>Plant diseases, paleo-botany, GMOs, nutrient cycles</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/botany" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Botany" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/botany" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Botany" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -68,13 +154,25 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🦠</span>
-          <div><div class="event-cat">Life Science</div><h3>Disease Detectives</h3></div>
+          <div><div class="event-cat">Life Science · Core Knowledge</div><h3>Disease Detectives</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants will use their investigative skills in the scientific study of disease, injury, health, and disability in populations.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test</span>
+          </div>
+          <p>Participants use investigative epidemiology skills to study disease, injury, health, and disability in populations. In partnership with the CDC.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper (both sides), 2 Class II calculators</div>
+          <ul class="topics-list">
+            <li>Background &amp; surveillance: epidemiology history, natural history of disease</li>
+            <li>Outbreak investigation: epi curves, case definitions, attack rates, relative risk</li>
+            <li>Patterns, control &amp; prevention: incidence/prevalence, disease control strategies</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/disease-detectives" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Disease_Detectives" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/disease-detectives" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Disease_Detectives" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -82,60 +180,121 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🧬</span>
-          <div><div class="event-cat">Life Science</div><h3>Heredity</h3></div>
+          <div><div class="event-cat">Life Science · Core Knowledge</div><h3>Heredity</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams will answer questions, solve problems, and analyze data pertaining to classic and molecular genetics.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test / stations</span>
+          </div>
+          <p>Teams answer questions, solve problems, and analyze data pertaining to classic and molecular genetics. Emphasis on quantitative reasoning.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper (both sides), 2 Class II calculators</div>
+          <ul class="topics-list">
+            <li>Mendelian genetics: Punnett squares, pedigrees, probability</li>
+            <li>Mitosis &amp; meiosis; karyotype analysis</li>
+            <li>DNA structure, replication, transcription &amp; translation</li>
+            <li>Hardy-Weinberg equilibrium; genetic drift</li>
+            <li>PCR techniques</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/heredity" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Heredity" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/heredity" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Heredity" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
       <div class="event-card">
         <div class="event-card-header">
-          <span class="event-icon">💧</span>
-          <div><div class="event-cat">Life Science</div><h3>Water Quality</h3></div>
+          <span class="event-icon">🌊</span>
+          <div><div class="event-cat">Life Science · Hybrid</div><h3>Water Quality</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants will be assessed on their understanding and evaluation of freshwater aquatic environments.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-eye">Eye Protection C</span>
+            <span class="pill pill-type">Test + hands-on</span>
+          </div>
+          <p>Participants are assessed on their understanding of <strong>marine and estuary aquatic environments</strong>, including coral reef ecology and water monitoring.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper (both sides), 2 Class II calculators, student-built salinometer</div>
+          <ul class="topics-list">
+            <li>Marine &amp; estuary ecology (30%): aquatic food webs, estuaries, harmful algal blooms</li>
+            <li>Coral reef organisms (30%): ID of coral, fish, invertebrates by common name</li>
+            <li>Water monitoring (30%): salinity, pH, dissolved oxygen, turbidity data interpretation</li>
+            <li>Salinometer testing (10%): measure 1–10% NaCl concentration with self-built device</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/water-quality" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Water_Quality" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/water-quality" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Water_Quality" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
     </div>
 
+    <!-- ══════════════════════════════════════════
+         EARTH & SPACE
+    ══════════════════════════════════════════ -->
     <div class="cat-header">🌍 Earth &amp; Space Science</div>
     <div class="card-grid">
 
       <div class="event-card">
         <div class="event-card-header">
-          <span class="event-icon">🌊</span>
-          <div><div class="event-cat">Earth &amp; Space</div><h3>Dynamic Planet</h3></div>
+          <span class="event-icon">🏞️</span>
+          <div><div class="event-cat">Earth &amp; Space · Core Knowledge</div><h3>Dynamic Planet</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams will complete tasks related to physical and geological oceanography.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Test / lab stations</span>
+          </div>
+          <p>Teams complete tasks related to <strong>Earth's fresh waters</strong>: rivers, groundwater, lakes, wetlands, and the hydrologic cycle. Partnership with NOAA.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 binder (any size), 2 Class II calculators</div>
+          <ul class="topics-list">
+            <li>Hydrologic cycle: water budgets, precipitation, runoff, infiltration</li>
+            <li>Drainage basins, stream order, channel types (braided, meandering)</li>
+            <li>Fluvial geomorphology: floodplains, oxbow lakes, deltas, alluvial fans</li>
+            <li>Groundwater: aquifers, karst features, sinkholes, springs</li>
+            <li>Lakes &amp; wetlands: stratification, formation, bogs vs. marshes</li>
+            <li>Topographic map interpretation; stream gauge hydrographs</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/dynamic-planet" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Dynamic_Planet" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/dynamic-planet" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Dynamic_Planet" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
       <div class="event-card">
         <div class="event-card-header">
-          <span class="event-icon">🌦️</span>
-          <div><div class="event-cat">Earth &amp; Space</div><h3>Meteorology</h3></div>
+          <span class="event-icon">🌪️</span>
+          <div><div class="event-cat">Earth &amp; Space · Core Knowledge</div><h3>Meteorology</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants will use scientific process skills to demonstrate an understanding of the factors that influence Everyday Weather.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test / stations</span>
+          </div>
+          <p>Participants analyze <strong>Severe Weather &amp; Storms</strong>: forecasting data, radar imagery, and the science behind tornadoes, hurricanes, and extreme precipitation. Partnership with NOAA.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 three-ring binder, 2 Class II calculators, U.S. map with state names</div>
+          <ul class="topics-list">
+            <li>Observation tools: Doppler radar, radiosondes, satellite imagery (visible/IR/water vapor)</li>
+            <li>Severe thunderstorms: single-cell, multicell, supercell, MCC structure</li>
+            <li>Tornadoes: EF scale, TVS, hook echo; waterspouts</li>
+            <li>Hurricanes: life cycles, Saffir-Simpson scale, storm surge, ENSO effects</li>
+            <li>Winter storms: blizzards, nor'easters, lake-effect snow, ice storms</li>
+            <li>Historic events: Katrina, Sandy, Ida, Ian, Helene; April 2011 tornadoes</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/meteorology" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Meteorology" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/meteorology" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Meteorology" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -143,13 +302,28 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🛰️</span>
-          <div><div class="event-cat">Earth &amp; Space</div><h3>Remote Sensing</h3></div>
+          <div><div class="event-cat">Earth &amp; Space · Core Knowledge</div><h3>Remote Sensing</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants will demonstrate an understanding of the basic principles of remote sensing and use imagery, data, and maps to complete tasks.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Test / stations</span>
+          </div>
+          <p>Participants demonstrate understanding of <strong>remote sensing principles</strong> and interpret imagery from Landsat, Sentinel, MODIS, GOES, and SRTM satellites to observe Earth. Sponsored by IEEE GRSS.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 three-ring binder, 2 Class II calculators, 2 protractors, 2 rulers</div>
+          <ul class="topics-list">
+            <li>Electromagnetic spectrum, reflection, scattering; Wien's Law, Stefan-Boltzmann Law</li>
+            <li>Passive sensors (optical, thermal) &amp; active sensors (radar, SAR, altimetry)</li>
+            <li>Satellite orbit types: LEO, MEO, geostationary, polar</li>
+            <li>Image interpretation: natural/false color, thermal, radar, elevation, land cover</li>
+            <li>Earth observation: vegetation, geohazards (volcanoes, landslides, floods), glacial movement</li>
+            <li>Scale, distance, area measurements from imagery</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/remote-sensing" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Remote_Sensing" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/remote-sensing" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Remote_Sensing" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -157,13 +331,28 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🪨</span>
-          <div><div class="event-cat">Earth &amp; Space</div><h3>Rocks &amp; Minerals</h3></div>
+          <div><div class="event-cat">Earth &amp; Space · Core Knowledge</div><h3>Rocks &amp; Minerals</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams will identify and classify rocks and minerals and demonstrate knowledge of how they help us understand geologic processes.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Station identification</span>
+          </div>
+          <p>Teams identify rocks and minerals from the official 2027 National List and demonstrate knowledge of geologic processes, classification, and economic uses.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 binder, 1 commercial field guide (annotated OK), 1 magnifying glass, 1 Class II calculator, copy of 2027 National R&amp;M List</div>
+          <ul class="topics-list">
+            <li>Mineral properties: hardness, luster, streak, cleavage, specific gravity</li>
+            <li>Mineral families: silicates, carbonates, sulfides, oxides, native elements, etc.</li>
+            <li>Igneous rocks: textures (aphanitic, porphyritic, vesicular), felsic vs. mafic</li>
+            <li>Sedimentary rocks: clastic/chemical/biochemical; grain size; depositional environments</li>
+            <li>Metamorphic rocks: foliated vs. non-foliated; index minerals; protoliths</li>
+            <li>Bowen's Reaction Series; Rock Cycle; economic uses</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/rocks-minerals" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Rocks_and_Minerals" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/rocks-minerals" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Rocks_and_Minerals" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -171,32 +360,64 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🪐</span>
-          <div><div class="event-cat">Earth &amp; Space</div><h3>Solar System</h3></div>
+          <div><div class="event-cat">Earth &amp; Space · Core Knowledge</div><h3>Solar System</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants will demonstrate their knowledge of planet formation and structure within and beyond the Solar System.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test</span>
+          </div>
+          <p>Participants demonstrate knowledge of <strong>habitability</strong> within and beyond the Solar System — conditions, geology, chemistry, and biology relevant to life.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 2 sheets of paper (both sides) — <em>no calculators allowed</em></div>
+          <ul class="topics-list">
+            <li>Focus objects: Venus, Mars, Ganymede, Europa, Enceladus, Titan, Makemake, Bennu, 67P/Churyumov–Gerasimenko</li>
+            <li>Extrasolar systems: TRAPPIST-1, Kepler-452, LHS 1140</li>
+            <li>Habitability conditions: temperature, atmosphere, liquid water, tidal heating</li>
+            <li>Extremophiles; building blocks of life (proteins, nucleic acids, lipids)</li>
+            <li>Exoplanet detection: transits, radial velocity, microlensing, direct imaging</li>
+            <li>Spacecraft: Europa Clipper, Cassini-Huygens, Perseverance, JWST, Dragonfly, OSIRIS-REx</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/solar-system" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Solar_System" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/solar-system" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Solar_System" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
     </div>
 
+    <!-- ══════════════════════════════════════════
+         PHYSICAL SCIENCE & CHEMISTRY
+    ══════════════════════════════════════════ -->
     <div class="cat-header">⚗️ Physical Science &amp; Chemistry</div>
     <div class="card-grid">
 
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">⚡</span>
-          <div><div class="event-cat">Physical Science</div><h3>Circuit Lab</h3></div>
+          <div><div class="event-cat">Physical Science · Hybrid</div><h3>Circuit Lab</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Participants must complete tasks and answer questions about electricity and magnetism.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Written test + hands-on</span>
+          </div>
+          <p>Participants complete hands-on tasks and answer questions about electricity and electronics. Written test is 50–75% of the score; hands-on is 25–50%. Supported by Kinder Morgan Foundation.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Unlimited binder/notes, 2 Class III calculators, optional personal multimeter</div>
+          <ul class="topics-list">
+            <li>DC/AC circuits: Ohm's Law, series/parallel, Kirchhoff's Laws (States+)</li>
+            <li>Digital logic: gates, truth tables, boolean expressions, De Morgan's Law, adders</li>
+            <li>Diodes, LEDs, PN junctions</li>
+            <li>Hands-on: breadboard circuits, mystery resistors, troubleshooting, 3-way switches</li>
+            <li>Historical: Ampere, Coulomb, Kirchhoff, Volta, Ohm, Hertz, Boole</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/circuit-lab" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Circuit_Lab" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/circuit-lab" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Circuit_Lab" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -204,41 +425,57 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🔍</span>
-          <div><div class="event-cat">Chemistry</div><h3>Crime Busters</h3></div>
+          <div><div class="event-cat">Chemistry · Lab</div><h3>Crime Busters</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Given a scenario, a collection of evidence, and possible suspects, students will perform a series of tests to identify the perpetrator.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-eye">Eye Protection C + apron</span>
+            <span class="pill pill-type">Hands-on lab</span>
+          </div>
+          <p>Given a crime scenario, students test evidence using chemistry to identify the perpetrator. 50% qualitative analysis, 25% scene analysis/write-up.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper each, 1 Class II calculator each, goggles, apron, Div-B Chemistry Lab Equipment List items</div>
+          <ul class="topics-list">
+            <li>Qualitative analysis of unknown solids (NaCl, flour, cornstarch, baking soda, sand, etc.) and liquids</li>
+            <li>Polymer testing: hair (human/dog/cat), fibers (animal/vegetable/synthetic), recyclable plastics (PETE, HDPE, PS, PP, PVC)</li>
+            <li>Paper chromatography: Rf values</li>
+            <li>Fingerprints (whorls/loops/arches), DNA electropherograms, shoeprints, soil, spatter patterns</li>
+            <li>Written analysis explaining which evidence implicates which suspect</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/crime-busters" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Crime_Busters" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/crime-busters" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Crime_Busters" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
       <div class="event-card">
         <div class="event-card-header">
-          <span class="event-icon">🍬</span>
-          <div><div class="event-cat">Chemistry</div><h3>Food Science</h3></div>
+          <span class="event-icon">🥛</span>
+          <div><div class="event-cat">Chemistry · Hybrid</div><h3>Food Science</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Students address food chemistry questions focused on sugars and construct hydrometers for measuring sugar solutions.</p>
-          <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/food-science" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Food_Science" target="_blank">SO Wiki</a>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-eye">Eye Protection C + apron</span>
+            <span class="pill pill-imp">Impound: notebook</span>
+            <span class="pill pill-type">Lab + notebook</span>
           </div>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-header">
-          <span class="event-icon">🌬️</span>
-          <div><div class="event-cat">Physical Science</div><h3>Hovercraft</h3></div>
-        </div>
-        <div class="event-card-body">
-          <p>Prior to the competition, participants will design, construct, and calibrate a self-propelled air-levitated vehicle that moves down a track.</p>
+          <p>Teams study dairy science and experiment with milk products. A pre-tournament notebook of experiments is impounded and graded. At Regionals, 1 lab task is completed on-site.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> 1 sheet of paper each, 2 Class III calculators, Chem Lab Equipment List items, 1-pint &amp; 1-gallon Ziploc bags, cheesecloth, 500–600 mL container w/ lid</div>
+          <ul class="topics-list">
+            <li>Pre-tournament: Notebook with 3+ experiments per task (9+ total), using the Food Science Experiment Form</li>
+            <li>Lab Task 1 — Ice Cream Formation: combine milk/cream, sugar, vanilla; freeze using ice + salt Ziploc method; maximize height</li>
+            <li>Lab Task 2 — Curd Mass: add acid to milk; drain through cheesecloth; measure curd mass percentage</li>
+            <li>Lab Task 3 — Butter: agitate cream until butter forms; measure yield</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/hovercraft" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Hovercraft" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/food-science" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Food_Science" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -246,20 +483,38 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🌡️</span>
-          <div><div class="event-cat">Physical Science</div><h3>Thermodynamics</h3></div>
+          <div><div class="event-cat">Physical Science · Hybrid</div><h3>Thermodynamics</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams must construct an insulated device prior to the tournament designed to retain heat, and complete a written test on heat transfer concepts.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-imp">Impound: device</span>
+            <span class="pill pill-type">Written test + device</span>
+          </div>
+          <p>Teams build a device prior to the tournament to <strong>collect heat from a lamp</strong> and raise the temperature of water. Score = written test (50%) + temperature gain (30%) + prediction accuracy (20%).</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Unlimited binder/notes, 2 Class III calculators, pre-built device (fits 30×30×30 cm cube)</div>
+          <ul class="topics-list">
+            <li>Zeroth, 1st &amp; 2nd Laws of thermodynamics; thermodynamic cycles &amp; engines</li>
+            <li>Heat transfer types: conduction, convection, radiation</li>
+            <li>Phase transitions, latent heat, specific heat capacity, ideal gas law</li>
+            <li>Historical: Kelvin, Black, Joule, Carnot, Planck, Clausius, Boltzmann, Maxwell</li>
+            <li>Device: no thermostats, vacuum-sealed containers, or hazardous materials (asbestos, fiberglass); must accept a 9 oz plastic cup of water; ES provides 100W heat lamp</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/thermodynamics" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Thermodynamics" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/thermodynamics" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Thermodynamics" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
     </div>
 
-    <div class="cat-header">🏗️ Technology &amp; Engineering</div>
+    <!-- ══════════════════════════════════════════
+         BUILD EVENTS
+    ══════════════════════════════════════════ -->
+    <div class="cat-header">🏗️ Build Events</div>
     <div class="card-grid">
 
       <div class="event-card">
@@ -268,10 +523,25 @@
           <div><div class="event-cat">Build</div><h3>Boomilever</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams will design and build a cantilevered beam or truss structure that extends from a vertical Testing Wall and supports a load.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">10 min</span>
+            <span class="pill pill-eye">Eye Protection B</span>
+            <span class="pill pill-type">Build event</span>
+          </div>
+          <p>Build a cantilevered wood structure that extends from a Testing Wall and holds maximum sand load. Score = Load Supported ÷ Structure Mass. Supported by Cleveland-Cliffs Foundation.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Pre-built structure only (no tools, no notes — ES provides all apparatus)</div>
+          <ul class="topics-list">
+            <li>Structure must be wood + adhesive only — no plywood, bamboo, paper, or bark</li>
+            <li>Attaches to Testing Wall via Mounting Bolt; load arm must extend 40–45 cm horizontally</li>
+            <li>Load Scored Bonus: hold ≥15 kg and touch wall only above 15 cm line (+5,000 g)</li>
+            <li>ES loads sand into bucket; loading stops when structure fails</li>
+            <li>Tiebreaker: lowest structure mass → closest estimated load to actual load</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/boomilever" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Boomilever" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/boomilever" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Boomilever" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -282,10 +552,82 @@
           <div><div class="event-cat">Build</div><h3>Elastic Launched Gliders</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Prior to the tournament, teams design, construct, and test elastic launched gliders to achieve the maximum time aloft.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">10 min (6-min flight period)</span>
+            <span class="pill pill-eye">Eye Protection B</span>
+            <span class="pill pill-type">Build event</span>
+          </div>
+          <p>Build elastic-launched gliders to achieve maximum time aloft. Up to 5 official flights; best 3 scores count. Sponsored by the National Free Flight Society.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Up to 2 gliders, launch handle(s), measurement box(es), flight log</div>
+          <ul class="topics-list">
+            <li>Glider must fit in team-provided box: 32.0 × 24.0 × 47.0 cm max</li>
+            <li>Mass 3.5–10.0 g; no Boron filaments; no pre-glued kits</li>
+            <li>Flight log with 10+ test flights (3 required parameters + 1 extra): +20% bonus multiplier</li>
+            <li>Score = sum of 3 best Flight Times × bonus multiplier</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/elastic-launched-gliders" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Elastic_Launched_Gliders" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/elastic-launched-gliders" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Elastic_Launched_Gliders" target="_blank" rel="noopener">SO Wiki</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-card-header">
+          <span class="event-icon">🌬️</span>
+          <div><div class="event-cat">Build</div><h3>Hovercraft</h3></div>
+        </div>
+        <div class="event-card-body">
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">8 min competition</span>
+            <span class="pill pill-eye">Eye Protection B</span>
+            <span class="pill pill-imp">Impound</span>
+            <span class="pill pill-type">Build event</span>
+          </div>
+          <p>Build a self-propelled air-levitated vehicle to carry nickels down a 185 cm track as close as possible to a Target Time (6–18 seconds). Score = Distance + Time + Mass.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Pre-built vehicle (impounded), 2 Class III calculators, tools</div>
+          <ul class="topics-list">
+            <li>Vehicle must fit 40 × 40 × 40 cm box when levitating; must have ¼" wooden dowel at front</li>
+            <li>Only batteries, wires, switches, resistors, capacitors, and up to 2 motors — no ICs</li>
+            <li>Batteries: max 12V, no lithium or lead; all propellers must be shielded</li>
+            <li>Up to 2 runs; best run score is Final Score</li>
+            <li>Optional ramp available but halves Distance Score and gives Mass Score of 0</li>
+          </ul>
+          <div class="event-links">
+            <a class="event-link" href="https://www.soinc.org/events/hovercraft" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Hovercraft" target="_blank" rel="noopener">SO Wiki</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-card-header">
+          <span class="event-icon">🪂</span>
+          <div><div class="event-cat">Build</div><h3>Ping-Pong Parachute</h3></div>
+        </div>
+        <div class="event-card-body">
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">5 min (2 launches)</span>
+            <span class="pill pill-eye">Eye Protection B</span>
+            <span class="pill pill-type">Build event</span>
+          </div>
+          <p>Build bottle rockets to launch a ping pong ball + parachute for maximum time aloft. Best single-launch time wins. Event is held indoors.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Up to 2 rockets, 2 ping pong balls, 2 parachutes, optional manual bicycle pump with gauge</div>
+          <ul class="topics-list">
+            <li>1-liter plastic carbonated beverage bottle only; no glue on pressure vessel, tape only</li>
+            <li>No metal anywhere; no water; air pressure only for propulsion</li>
+            <li>Practice log with 10+ flights (3 required parameters + 2 extra): required to choose your own pressure; without it, capped at safe ES-determined pressure &amp; score ×0.70</li>
+            <li>Ceiling hit penalty: ×0.25; parachute fails to separate: ×0.90</li>
+          </ul>
+          <div class="event-links">
+            <a class="event-link" href="https://www.soinc.org/events/ping-pong-parachute" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Ping-Pong_Parachute" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -296,10 +638,26 @@
           <div><div class="event-cat">Build</div><h3>Roller Coaster</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Prior to the competition, teams design, build, and test a Roller Coaster track to guide a ball using gravitational potential energy to hit a target time.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">12 min (8-min run time)</span>
+            <span class="pill pill-eye">Eye Protection B</span>
+            <span class="pill pill-imp">Impound</span>
+            <span class="pill pill-type">Build event</span>
+          </div>
+          <p>Build a track to guide a ball using gravity alone to match a Target Time of 30–60 seconds. Score = Size + Time + optional Elevator &amp; Loop bonuses.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Pre-built coaster + ball(s), tools, spare parts (all impounded)</div>
+          <ul class="topics-list">
+            <li>Max size: 30 × 80 × 60 cm; ball ≥1 cm diameter, always visible</li>
+            <li>Gravity-only propulsion; no springs, rubber bands, magnets, or electronics</li>
+            <li>Time Bonus: +5 pts/sec up to Target Time; Time Penalty: −5 pts/sec past Target Time</li>
+            <li>Elevator bonus: +50 pts each for Type 1 (1st-class lever + wheel &amp; axle) and Type 2 (2nd-class lever + pulley) if ball rises ≥10 cm</li>
+            <li>Loop bonus: +3 pts per cm of loop height if ball completes it while unsupported at top</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/roller-coaster" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Roller_Coaster" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/roller-coaster" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Roller_Coaster" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -310,30 +668,65 @@
           <div><div class="event-cat">Build</div><h3>Scrambler</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams design, build, and test a mechanical device which uses the energy from a falling mass to transport an egg along a track as close to a wall as possible without breaking it.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">2 students</span>
+            <span class="pill pill-time">12 min (8-min event time)</span>
+            <span class="pill pill-eye">Eye Protection B</span>
+            <span class="pill pill-imp">Impound</span>
+            <span class="pill pill-type">Build event · Low score wins</span>
+          </div>
+          <p>A falling mass (≤2 kg) propels a vehicle carrying an egg to stop as close as possible to a Terminal Barrier (7–10 m away) without breaking the egg. Sponsored by International Motors.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Pre-built Scrambler + spare parts (impounded); tools; Class III calculator</div>
+          <ul class="topics-list">
+            <li>Entire Scrambler must fit in a 100 × 50 × 100 cm box; falling mass ≤2 kg; cannot touch floor</li>
+            <li>Backstop: solid unpadded 5×5 cm wood (no balsa); egg rests on two ¼"–⅜" dowels</li>
+            <li>Vehicle started by removing a #2 pencil provided by ES; stopping mechanism must be automatic</li>
+            <li>Score = 100 + (Distance from wall × 2 pt/cm) + Run Time + Can Bonus; lower is better</li>
+            <li>2 runs allowed; best (lower) score counts; broken egg ends competition</li>
+            <li>Commercial kit allowed if team makes 2+ documented functional modifications</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/scrambler" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Scrambler" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/scrambler" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Scrambler" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
 
     </div>
 
+    <!-- ══════════════════════════════════════════
+         INQUIRY & NATURE OF SCIENCE
+    ══════════════════════════════════════════ -->
     <div class="cat-header">🔭 Inquiry &amp; Nature of Science</div>
     <div class="card-grid">
 
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🔐</span>
-          <div><div class="event-cat">Inquiry</div><h3>Codebusters</h3></div>
+          <div><div class="event-cat">Inquiry · Core Knowledge</div><h3>Codebusters</h3></div>
         </div>
         <div class="event-card-body">
-          <p>Teams will cryptanalyze and decode encrypted messages using cryptanalysis techniques for historical and modern advanced ciphers.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">Up to 3 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-type">Decryption exam</span>
+          </div>
+          <p>Teams decrypt encrypted messages using historical and modern cryptanalysis techniques. Score = Exam + Timing Bonus (first Aristocrat) + Special Bonus (hardest ciphers).</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Writing utensils only — no resource materials. ES provides Morse code, letter frequency, and cipher tables</div>
+          <ul class="topics-list">
+            <li>Aristocrat &amp; Patristocrat (monoalphabetic substitution, K1 alphabet)</li>
+            <li>Baconian Cipher; Atbash; Caesar (shift) Cipher</li>
+            <li>Fractionated Morse; Porta Cipher; Nihilist Cipher</li>
+            <li>Complete Columnar Transposition (≤9 columns); 5×5 Checkerboard; Homophonic Cipher</li>
+            <li>Xenocrypt (Spanish + K1 English alphabet); Cryptarithms (base-10 math)</li>
+            <li>Timing bonus for 1st question: 2 × (600 − seconds)</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/codebusters" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Codebusters" target="_blank">SO Wiki</a>
-            <a class="event-link" href="https://www.cryptoclub.org/" target="_blank">CryptoClub</a>
+            <a class="event-link" href="https://www.soinc.org/events/codebusters" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Codebusters" target="_blank" rel="noopener">SO Wiki</a>
+            <a class="event-link" href="https://www.cryptoclub.org/" target="_blank" rel="noopener">CryptoClub</a>
           </div>
         </div>
       </div>
@@ -341,27 +734,27 @@
       <div class="event-card">
         <div class="event-card-header">
           <span class="event-icon">🧪</span>
-          <div><div class="event-cat">Inquiry</div><h3>Experimental Design</h3></div>
+          <div><div class="event-cat">Inquiry · Lab</div><h3>Experimental Design</h3></div>
         </div>
         <div class="event-card-body">
-          <p>This event will determine the participant's ability to design, conduct, and report the findings of an experiment entirely on-site using the scientific method.</p>
-          <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/experimental-design" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Experimental_Design" target="_blank">SO Wiki</a>
+          <div class="rules-pills">
+            <span class="pill pill-team">Up to 3 students</span>
+            <span class="pill pill-time">50 min</span>
+            <span class="pill pill-eye">Eye Protection C</span>
+            <span class="pill pill-type">On-site experiment</span>
           </div>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-header">
-          <span class="event-icon">🪂</span>
-          <div><div class="event-cat">Build / Inquiry</div><h3>Ping-Pong Parachute</h3></div>
-        </div>
-        <div class="event-card-body">
-          <p>Prior to the tournament, teams will design, build, and bring up to three bottle rockets to launch a ping pong ball as close to a target time aloft as possible.</p>
+          <p>Teams design, conduct, and report the findings of an experiment entirely on-site using unknown materials. First 20 minutes: design &amp; conduct. Last 30 minutes: analyze &amp; write up.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Goggles, 1 timepiece, 1 ruler, 1 Class II calculator — none may be used as part of the experiment</div>
+          <ul class="topics-list">
+            <li>Materials identity unknown until start; ES provides identical sets for all teams</li>
+            <li>Must identify independent variable (IV), dependent variable (DV), and 3+ controlled variables (CVs)</li>
+            <li>Scored on 51-pt Part I (design) + 55-pt Part II (data, graph, CER analysis, conclusion)</li>
+            <li>Off-topic: ×0.75 penalty; fake/no data: ×0.25 penalty; no clean-up: ×0.95</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/ping-pong-parachute" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Ping-Pong_Parachute" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/experimental-design" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Experimental_Design" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -372,10 +765,24 @@
           <div><div class="event-cat">Inquiry</div><h3>Write It Do It</h3></div>
         </div>
         <div class="event-card-body">
-          <p>One participant will write a description of an object and how to build it. The other participant will attempt to construct the object from those instructions alone.</p>
+          <div class="rules-pills">
+            <span class="pill pill-team">Exactly 2 students</span>
+            <span class="pill pill-time">50 min (25 write + 20 build)</span>
+            <span class="pill pill-type">Communication challenge</span>
+          </div>
+          <p>One student sees an object and writes a description of how to build it (no drawings). The other student reads only the description and attempts to build the object. Scored on how close the replica is to the original.</p>
+          <hr class="event-divider">
+          <div class="bring-row"><strong>What to bring:</strong> Writer brings writing utensil only — no other resources allowed for either participant</div>
+          <ul class="topics-list">
+            <li>Object is built from materials like K'nex, Lego, straws, Popsicle sticks, etc. — unknown until event</li>
+            <li>Writer has 25 min; NO drawings or diagrams allowed (disqualification); words, numerals, symbols OK</li>
+            <li>Builder has 20 min with written description only; cannot see original object</li>
+            <li>Each piece scored on: size, color, location, orientation, and connection</li>
+            <li>Drawing a subsection = Tier 2; drawing the full model = disqualification</li>
+          </ul>
           <div class="event-links">
-            <a class="event-link" href="https://www.soinc.org/events/write-it-do-it" target="_blank">Official Page</a>
-            <a class="event-link" href="https://scioly.org/wiki/index.php/Write_It_Do_It" target="_blank">SO Wiki</a>
+            <a class="event-link" href="https://www.soinc.org/events/write-it-do-it" target="_blank" rel="noopener">Official Page</a>
+            <a class="event-link" href="https://scioly.org/wiki/index.php/Write_It_Do_It" target="_blank" rel="noopener">SO Wiki</a>
           </div>
         </div>
       </div>
@@ -383,9 +790,8 @@
     </div>
 
     <p class="mt-24" style="font-size: 13px; color: var(--text-light);">
-      All 23 official Division B events for the 2026–2027 season. Source:
-      <a href="https://www.soinc.org/events/2027-division-b-events" target="_blank" rel="noopener">soinc.org</a> ·
-      <a href="https://www.soinc.org/learn/b-event-short-descriptions" target="_blank" rel="noopener">Official descriptions</a>
+      All 23 official Division B events for the 2026–2027 season. Rules summaries based on the official 2027 Division B Rules Manual. For complete rules, see
+      <a href="https://www.soinc.org" target="_blank" rel="noopener">soinc.org</a>.
     </p>
 
   </div>
@@ -393,6 +799,7 @@
 
 <footer>
   <p>Haycock Science Olympiad &nbsp;|&nbsp; 2026–2027 Season &nbsp;|&nbsp;
+  <a href="mailto:Haycock2027SO@gmail.com">Haycock2027SO@gmail.com</a> &nbsp;|&nbsp;
   <a href="admin/index.html">Admin</a></p>
 </footer>
 
